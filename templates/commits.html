@@ -1,0 +1,38 @@
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>Commits</title>
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+  </head>
+  <body>
+    <div id="chart_div"></div>
+    <script>
+      google.charts.load('current', { packages: ['corechart'] });
+      google.charts.setOnLoadCallback(drawChart);
+
+      function drawChart() {
+        fetch('/extract-minutes/{commit_timestamp}')
+          .then(response => response.json())
+          .then(data => {
+            var dataTable = new google.visualization.DataTable();
+            dataTable.addColumn('string', 'Temps');
+            dataTable.addColumn('number', 'Commits');
+
+            // Ajouter des données récupérées à dataTable
+            // Exemple :
+            dataTable.addRow(['11:57', data.minutes]);
+
+            var options = {
+              title: 'Activité des commits',
+              hAxis: { title: 'Temps' },
+              vAxis: { title: 'Nombre de commits' },
+              legend: 'none'
+            };
+
+            var chart = new google.visualization.ColumnChart(document.getElementById('chart_div'));
+            chart.draw(dataTable, options);
+          });
+      }
+    </script>
+  </body>
+</html>
