@@ -52,7 +52,7 @@ def show_commits():
 
 @app.route('/get_commits/')
 def get_commits():
-    url = 'https://api.github.com/repos/OpenRSI/5MCSI_Metriques/commits'
+    url = 'https://api.github.com/repos/BVDRCORP/5MCSI_Metriques/commits'
     response = requests.get(url)
     
     if response.status_code == 200:
