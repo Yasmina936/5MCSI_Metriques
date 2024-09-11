@@ -11,26 +11,29 @@
       google.charts.setOnLoadCallback(drawChart);
 
       function drawChart() {
-        fetch('/extract-minutes/{commit_timestamp}')
+        fetch('/get_commits/')
           .then(response => response.json())
           .then(data => {
             var dataTable = new google.visualization.DataTable();
-            dataTable.addColumn('string', 'Temps');
-            dataTable.addColumn('number', 'Commits');
+            dataTable.addColumn('string', 'Commit Time');
+            dataTable.addColumn('number', 'Minutes');
 
-            // Ajouter des données récupérées à dataTable
-            // Exemple :
-            dataTable.addRow(['11:57', data.minutes]);
+            data.commit_dates.forEach(function(date_string) {
+              fetch(`/extract-minutes/${date_string}`)
+                .then(response => response.json())
+                .then(minutesData => {
+                  dataTable.addRow([date_string, minutesData.minutes]);
 
-            var options = {
-              title: 'Activité des commits',
-              hAxis: { title: 'Temps' },
-              vAxis: { title: 'Nombre de commits' },
-              legend: 'none'
-            };
-
-            var chart = new google.visualization.ColumnChart(document.getElementById('chart_div'));
-            chart.draw(dataTable, options);
+                  var options = {
+                    title: 'Commits Activity',
+                    hAxis: { title: 'Commit Time' },
+                    vAxis: { title: 'Minutes' },
+                    legend: 'none'
+                  };
+                  var chart = new google.visualization.ColumnChart(document.getElementById('chart_div'));
+                  chart.draw(dataTable, options);
+                });
+            });
           });
       }
     </script>
