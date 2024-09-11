@@ -52,29 +52,11 @@ def show_commits():
     return render_template('commits.html')
 
 
-@app.route('/extract-minutes/<date_string>')
-def extract_minutes(date_string):
-    try:
-        date_object = datetime.strptime(date_string, '%Y-%m-%dT%H:%M:%SZ')
-        minutes = date_object.minute
-        return jsonify({'minutes': minutes})
-    except Exception as e:
-        return jsonify({"error": str(e)})
 
 
-@app.route('/get_commits/')
-def get_commits():
-    url = 'https://api.github.com/repos/BVDRCORP/metriques/commits'  
-    try:
-        response = urlopen(url)
-        data = response.read()
-        commits = json.loads(data.decode('utf-8'))
-        commit_dates = [commit['commit']['author']['date'] for commit in commits]
-        return jsonify(commit_dates=commit_dates)
-    except Exception as e:
-        return jsonify({"error": str(e)})
-
-
+@app.route("/commits/")
+def moncommits():
+    return render_template("commits.html")
   
 if __name__ == "__main__":
   app.run(debug=True)
