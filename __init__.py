@@ -6,7 +6,8 @@ from urllib.request import urlopen
 import sqlite3
 import requests
 from flask import jsonify
-from datetime import datetime
+import json
+
                                                                                                                                        
 app = Flask(__name__)                                                                                                                  
                                                                                                                                        
@@ -50,17 +51,6 @@ def mongraphique():
 def show_commits():
     return render_template('commits.html')
 
-@app.route('/get_commits/')
-def get_commits():
-    url = 'https://api.github.com/repos/BVDRCORP/5MCSI_Metriques/commits'
-    response = requests.get(url)
-    
-    if response.status_code == 200:
-        commits = response.json()
-        commit_dates = [commit['commit']['author']['date'] for commit in commits]
-        return jsonify(commit_dates=commit_dates)
-    else:
-        return jsonify({"error": "Unable to fetch commits"})
 
 @app.route('/extract-minutes/<date_string>')
 def extract_minutes(date_string):
@@ -70,6 +60,20 @@ def extract_minutes(date_string):
         return jsonify({'minutes': minutes})
     except Exception as e:
         return jsonify({"error": str(e)})
+
+
+@app.route('/get_commits/')
+def get_commits():
+    url = 'https://api.github.com/repos/BVDRCORP/metriques/commits'  
+    try:
+        response = urlopen(url)
+        data = response.read()
+        commits = json.loads(data.decode('utf-8'))
+        commit_dates = [commit['commit']['author']['date'] for commit in commits]
+        return jsonify(commit_dates=commit_dates)
+    except Exception as e:
+        return jsonify({"error": str(e)})
+
 
   
 if __name__ == "__main__":
