@@ -1,1 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Commits par Minute</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin: 20px;
+        }
+        canvas {
+            max-width: 100%;
+        }
+    </style>
+</head>
+<body>
+    <h1>Nombre de Commits par Minute</h1>
+    <canvas id="commitsChart" width="800" height="400"></canvas>
+    <script>
+        // Fonction pour extraire les minutes depuis une date ISO
+        function extractMinutes(dateString) {
+            const dateObject = new Date(dateString);
+            return dateObject.getUTCMinutes();
+        }
 
+        // Récupérer les données des commits depuis l'API GitHub
+        fetch('https://api.github.com/repos/BVDRCORP/5MCSI_Metriques/commits')
+            .then(response => response.json())
+            .then(data => {
+                // Compter le nombre de commits par minute
+                const minuteCounts = {};
+                
+                data.forEach(commit => {
+                    const date = commit.commit.author.date;
+                    const minute = extractMinutes(date);
+                    if (minuteCounts[minute]) {
+                        minuteCounts[minute]++;
+                    } else {
+                        minuteCounts[minute] = 1;
+                    }
+                });
+
+                // Extraire les minutes et les comptes
+                const minutes = Object.keys(minuteCounts).map(minute => parseInt(minute));
+                const counts = Object.values(minuteCounts);
+
+                // Créer le graphique
+                const ctx = document.getElementById('commitsChart').getContext('2d');
+                new Chart(ctx, {
+                    type: 'bar',
+                    data: {
+                        labels: minutes,
+                        datasets: [{
+                            label: 'Nombre de Commits',
+                            data: counts,
+                            backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                            borderColor: 'rgba(75, 192, 192, 1)',
+                            borderWidth: 1
+                        }]
+                    },
+                    options: {
+                        scales: {
+                            x: {
+                                title: {
+                                    display: true,
+                                    text: 'Minute'
+                                }
+                            },
+                            y: {
+                                beginAtZero: true,
+                                title: {
+                                    display: true,
+                                    text: 'Nombre de Commits'
+                                }
+                            }
+                        }
+                    }
+                });
+            })
+            .catch(error => {
+                console.error('Erreur:', error);
+            });
+    </script>
+</body>
+</html>
