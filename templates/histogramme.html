@@ -1,39 +1,94 @@
-<html>
-  <head>
+<!DOCTYPE html>
+<html lang="en">
+<head>
     <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Histogramme</title>
     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-  </head>
-  <body>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0; /* Fond très clair */
+            color: #333; /* Texte sombre pour le contraste */
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        #chart_div {
+            width: 80%;
+            height: 400px;
+            background-color: #fff; /* Fond blanc pour le graphique */
+            border-radius: 10px; /* Coins arrondis pour un effet moderne */
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Ombre légère pour le relief */
+        }
+        .google-visualization-tooltip {
+            font-family: Arial, sans-serif;
+            font-size: 14px;
+        }
+    </style>
+</head>
+<body>
     <div id="chart_div"></div>
     <script>
-      google.charts.load('current', { packages: ['corechart'] });
-      google.charts.setOnLoadCallback(drawChart);
-      
-      function drawChart() {
-        fetch('/tawarano/')
-          .then(response => response.json())
-          .then(data => {
-            var dataTable = new google.visualization.DataTable();
-            dataTable.addColumn('string', 'Jour');
-            dataTable.addColumn('number', 'Température (°C)');
+        google.charts.load('current', { packages: ['corechart'] });
+        google.charts.setOnLoadCallback(drawChart);
 
-            data.results.forEach(entry => {
-              var date = new Date(entry.Jour * 1000);
-              dataTable.addRow([date.toLocaleDateString(), entry.temp]);
-            });
+        function drawChart() {
+            fetch('/tawarano/')
+                .then(response => response.json())
+                .then(data => {
+                    var dataTable = new google.visualization.DataTable();
+                    dataTable.addColumn('string', 'Jour');
+                    dataTable.addColumn('number', 'Température (°C)');
 
-            var options = {
-              title: 'Évolution des températures',
-              hAxis: { title: 'Jour' },
-              vAxis: { title: 'Température (°C)' },
-              legend: 'none'
-            };
+                    data.results.forEach(entry => {
+                        var date = new Date(entry.Jour * 1000);
+                        dataTable.addRow([date.toLocaleDateString(), entry.temp]);
+                    });
 
-            var chart = new google.visualization.ColumnChart(document.getElementById('chart_div'));
-            chart.draw(dataTable, options);
-          });
-      }
+                    var options = {
+                        title: 'Évolution des températures',
+                        titleTextStyle: {
+                            color: '#2c3e50', /* Couleur du titre */
+                            fontSize: 18, /* Taille du titre */
+                            bold: true /* Titre en gras */
+                        },
+                        hAxis: {
+                            title: 'Jour',
+                            titleTextStyle: {
+                                color: '#2c3e50' /* Couleur du titre de l'axe */
+                            },
+                            textStyle: {
+                                color: '#7f8c8d' /* Couleur des labels de l'axe */
+                            }
+                        },
+                        vAxis: {
+                            title: 'Température (°C)',
+                            titleTextStyle: {
+                                color: '#2c3e50' /* Couleur du titre de l'axe */
+                            },
+                            textStyle: {
+                                color: '#7f8c8d' /* Couleur des labels de l'axe */
+                            },
+                            gridlines: {
+                                color: '#ecf0f1' /* Couleur des lignes de grille */
+                            }
+                        },
+                        legend: 'none',
+                        colors: ['#1abc9c'], /* Couleur des barres */
+                        bar: {
+                            groupWidth: '75%' /* Largeur des barres */
+                        }
+                    };
+
+                    var chart = new google.visualization.ColumnChart(document.getElementById('chart_div'));
+                    chart.draw(dataTable, options);
+                });
+        }
     </script>
-  </body>
+</body>
 </html>
+
