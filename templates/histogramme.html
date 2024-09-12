@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<html>
 <html lang="en">
 <head>
     <meta charset="UTF-8" />
@@ -8,7 +8,7 @@
     <style>
         body {
             font-family: Arial, sans-serif;
-            background-color: #f0f0f0; /* Fond très clair */
+            background-color: #e9f5f5; /* Fond très clair avec une touche de bleu */
             color: #333; /* Texte sombre pour le contraste */
             margin: 0;
             padding: 20px;
@@ -20,9 +20,9 @@
         #chart_div {
             width: 80%;
             height: 400px;
-            background-color: #fff; /* Fond blanc pour le graphique */
-            border-radius: 10px; /* Coins arrondis pour un effet moderne */
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Ombre légère pour le relief */
+            background-color: #ffffff; /* Fond blanc pour le graphique */
+            border-radius: 12px; /* Coins arrondis pour un effet moderne */
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15); /* Ombre plus marquée pour le relief */
         }
         .google-visualization-tooltip {
             font-family: Arial, sans-serif;
@@ -52,35 +52,35 @@
                     var options = {
                         title: 'Évolution des températures',
                         titleTextStyle: {
-                            color: '#2c3e50', /* Couleur du titre */
-                            fontSize: 18, /* Taille du titre */
+                            color: '#3498db', /* Couleur du titre en bleu clair */
+                            fontSize: 20, /* Taille du titre */
                             bold: true /* Titre en gras */
                         },
                         hAxis: {
                             title: 'Jour',
                             titleTextStyle: {
-                                color: '#2c3e50' /* Couleur du titre de l'axe */
+                                color: '#3498db' /* Couleur du titre de l'axe */
                             },
                             textStyle: {
-                                color: '#7f8c8d' /* Couleur des labels de l'axe */
+                                color: '#2c3e50' /* Couleur des labels de l'axe */
                             }
                         },
                         vAxis: {
                             title: 'Température (°C)',
                             titleTextStyle: {
-                                color: '#2c3e50' /* Couleur du titre de l'axe */
+                                color: '#3498db' /* Couleur du titre de l'axe */
                             },
                             textStyle: {
-                                color: '#7f8c8d' /* Couleur des labels de l'axe */
+                                color: '#2c3e50' /* Couleur des labels de l'axe */
                             },
                             gridlines: {
                                 color: '#ecf0f1' /* Couleur des lignes de grille */
                             }
                         },
                         legend: 'none',
-                        colors: ['#1abc9c'], /* Couleur des barres */
+                        colors: ['#e74c3c'], /* Couleur vive pour les barres (rouge vif) */
                         bar: {
-                            groupWidth: '75%' /* Largeur des barres */
+                            groupWidth: '70%' /* Largeur des barres */
                         }
                     };
 
