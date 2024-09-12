@@ -1,90 +1,104 @@
-<html>
-  <head>
-    <meta charset="UTF-8" />
-    <title>Contact (Néo-Rétro)</title>
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Minimaliste</title>
     <style>
-      body {
-        font-family: 'Arial', sans-serif; /* Police minimaliste */
-        background-color: #ffffff; /* Fond blanc */
-        color: #008000; /* Texte en vert */
-        margin: 0;
-        padding: 0;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        height: 100vh;
-      }
-      
-      .contact-form {
-        background-color: #ffffff; /* Fond blanc */
-        padding: 20px;
-        border-radius: 8px;
-        box-shadow: 0 0 15px rgba(0, 0, 0, 0.1); /* Ombre plus légère */
-        width: 400px;
-        border: 2px solid #008000; /* Bordure plus fine en vert */
-      }
-      
-      h2 {
-        text-align: center;
-        color: #008000; /* Texte en vert */
-        font-size: 18px; /* Taille de texte plus petite pour un effet minimaliste */
-        font-weight: normal; /* Pas de texte gras */
-        letter-spacing: 1px; /* Espace réduit entre les lettres */
-      }
-      
-      label {
-        font-size: 14px; /* Taille de texte légèrement augmentée pour une meilleure lisibilité */
-        color: #008000; /* Texte en vert */
-        display: block;
-        margin-top: 10px;
-      }
-      
-      input[type="text"], textarea {
-        width: 100%;
-        padding: 8px; /* Moins de padding pour un effet plus sobre */
-        margin: 8px 0;
-        border: 1px solid #008000; /* Bordure plus fine en vert */
-        border-radius: 4px; /* Coins légèrement arrondis */
-        background-color: #ffffff; /* Fond blanc */
-        color: #008000; /* Texte en vert */
-        font-family: 'Arial', sans-serif; /* Police minimaliste */
-        font-size: 14px; /* Taille de police réduite */
-      }
-      
-      input[type="submit"] {
-        background-color: #008000; /* Bouton vert */
-        color: white; /* Texte en blanc */
-        border: none;
-        padding: 10px;
-        border-radius: 4px;
-        cursor: pointer;
-        width: 100%;
-        font-size: 14px; /* Taille de police réduite */
-        text-transform: uppercase;
-      }
-      
-      input[type="submit"]:hover {
-        background-color: #006400; /* Plus foncé au survol */
-      }
+        body {
+            font-family: Arial, sans-serif; /* Police minimaliste */
+            background-color: #f4f4f4; /* Fond gris très clair pour contraste */
+            color: #333; /* Texte gris foncé */
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .contact-form {
+            background-color: #ffffff; /* Fond blanc pour le formulaire */
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Ombre douce */
+            width: 100%;
+            max-width: 350px; /* Largeur limitée pour un look compact */
+            box-sizing: border-box;
+        }
+
+        h2 {
+            text-align: center;
+            color: #333; /* Texte sombre */
+            font-size: 20px;
+            margin-bottom: 20px; /* Espacement sous le titre */
+            font-weight: normal; /* Pas de gras */
+        }
+
+        label {
+            display: block;
+            color: #333;
+            font-size: 14px;
+            margin-bottom: 5px;
+        }
+
+        input[type="text"], textarea {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px; /* Espacement entre les champs */
+            border: 1px solid #ddd; /* Bordure gris clair */
+            border-radius: 3px; /* Coins légèrement arrondis */
+            font-size: 14px;
+            box-sizing: border-box;
+        }
+
+        input[type="text"]:focus, textarea:focus {
+            border-color: #008000; /* Bordure verte quand l'élément est sélectionné */
+            outline: none; /* Retirer le contour par défaut */
+        }
+
+        input[type="submit"] {
+            width: 100%;
+            padding: 10px;
+            background-color: #008000; /* Fond vert pour le bouton */
+            color: white;
+            border: none;
+            border-radius: 3px;
+            font-size: 14px;
+            cursor: pointer;
+            box-sizing: border-box;
+        }
+
+        input[type="submit"]:hover {
+            background-color: #006400; /* Vert plus foncé au survol */
+        }
+
+        /* Réduire les marges et paddings par défaut du formulaire pour une meilleure harmonie */
+        form {
+            margin: 0;
+            padding: 0;
+        }
 
     </style>
-    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
-  </head>
-  <body>
+</head>
+<body>
+
     <div class="contact-form">
-      <h2>Contactez-nous</h2>
-      <form>
-        <label>Nom :</label>
-        <input type="text" name="nom" placeholder="Votre nom"><br>
-        
-        <label>Prénom :</label>
-        <input type="text" name="prenom" placeholder="Votre prénom"><br>
-        
-        <label>Message :</label>
-        <textarea name="message" placeholder="Votre message"></textarea><br>
-        
-        <input type="submit" value="Envoyer">
-      </form>
+        <h2>Contactez-nous</h2>
+        <form>
+            <label for="nom">Nom :</label>
+            <input type="text" id="nom" name="nom" placeholder="Votre nom" required>
+
+            <label for="prenom">Prénom :</label>
+            <input type="text" id="prenom" name="prenom" placeholder="Votre prénom" required>
+
+            <label for="message">Message :</label>
+            <textarea id="message" name="message" rows="4" placeholder="Votre message" required></textarea>
+
+            <input type="submit" value="Envoyer">
+        </form>
     </div>
-  </body>
+
+</body>
 </html>
+
