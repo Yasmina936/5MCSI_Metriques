@@ -8,36 +8,17 @@
     <style>
         body {
             font-family: Arial, sans-serif;
-            background-color: #f4f4f4; /* Fond gris très clair */
-            color: #333; /* Texte sombre */
             text-align: center;
             margin: 20px;
         }
-        h1 {
-            font-size: 18px; /* Taille du texte du titre réduite */
-            margin-bottom: 10px; /* Réduit l'espacement sous le titre */
-            color: #008000; /* Texte vert */
-        }
-        .chart-container {
-            width: 300px; /* Largeur maximale du graphique */
-            height: 150px; /* Hauteur du graphique */
-            margin: 0 auto; /* Centrer le graphique */
-            position: relative;
-            background-color: #fff; /* Fond blanc pour le conteneur */
-            border: 1px solid #ddd; /* Bordure gris clair */
-            border-radius: 4px; /* Coins légèrement arrondis */
-        }
         canvas {
-            width: 100% !important; /* Assurer que le canvas prend toute la largeur du conteneur */
-            height: 100% !important; /* Assurer que le canvas prend toute la hauteur du conteneur */
+            max-width: 100%;
         }
     </style>
 </head>
 <body>
     <h1>Nombre de Commits par Minute</h1>
-    <div class="chart-container">
-        <canvas id="commitsChart"></canvas>
-    </div>
+    <canvas id="commitsChart" width="800" height="400"></canvas>
     <script>
         // Fonction pour extraire les minutes depuis une date ISO
         function extractMinutes(dateString) {
@@ -75,40 +56,25 @@
                         datasets: [{
                             label: 'Nombre de Commits',
                             data: counts,
-                            backgroundColor: 'rgba(0, 128, 0, 0.2)', /* Vert pâle pour les barres */
-                            borderColor: 'rgba(0, 128, 0, 1)', /* Bordure verte foncée */
+                            backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                            borderColor: 'rgba(75, 192, 192, 1)',
                             borderWidth: 1
                         }]
                     },
                     options: {
-                        responsive: true,
-                        maintainAspectRatio: false, /* Permet de ne pas maintenir le ratio d'aspect */
                         scales: {
                             x: {
                                 title: {
                                     display: true,
-                                    text: 'Minute',
-                                    color: '#333',
-                                    font: {
-                                        size: 10
-                                    }
+                                    text: 'Minute'
                                 }
                             },
                             y: {
                                 beginAtZero: true,
                                 title: {
                                     display: true,
-                                    text: 'Nombre de Commits',
-                                    color: '#333',
-                                    font: {
-                                        size: 10
-                                    }
+                                    text: 'Nombre de Commits'
                                 }
-                            }
-                        },
-                        plugins: {
-                            legend: {
-                                display: false, /* Cacher la légende pour un rendu plus minimaliste */
                             }
                         }
                     }
