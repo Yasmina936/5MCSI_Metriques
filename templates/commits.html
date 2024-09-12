@@ -14,25 +14,29 @@
             margin: 20px;
         }
         h1 {
-            font-size: 20px; /* Taille du texte du titre réduite */
-            margin-bottom: 15px; /* Réduit l'espacement sous le titre */
+            font-size: 18px; /* Taille du texte du titre réduite */
+            margin-bottom: 10px; /* Réduit l'espacement sous le titre */
             color: #008000; /* Texte vert */
         }
-        canvas {
-            max-width: 100%;
-            width: 100%; /* Le canvas prend toute la largeur disponible */
-            height: auto; /* Hauteur automatique pour conserver les proportions */
-        }
         .chart-container {
-            max-width: 400px; /* Largeur maximale du graphique */
+            width: 300px; /* Largeur maximale du graphique */
+            height: 150px; /* Hauteur du graphique */
             margin: 0 auto; /* Centrer le graphique */
+            position: relative;
+            background-color: #fff; /* Fond blanc pour le conteneur */
+            border: 1px solid #ddd; /* Bordure gris clair */
+            border-radius: 4px; /* Coins légèrement arrondis */
+        }
+        canvas {
+            width: 100% !important; /* Assurer que le canvas prend toute la largeur du conteneur */
+            height: 100% !important; /* Assurer que le canvas prend toute la hauteur du conteneur */
         }
     </style>
 </head>
 <body>
     <h1>Nombre de Commits par Minute</h1>
     <div class="chart-container">
-        <canvas id="commitsChart" width="400" height="200"></canvas>
+        <canvas id="commitsChart"></canvas>
     </div>
     <script>
         // Fonction pour extraire les minutes depuis une date ISO
@@ -77,14 +81,16 @@
                         }]
                     },
                     options: {
+                        responsive: true,
+                        maintainAspectRatio: false, /* Permet de ne pas maintenir le ratio d'aspect */
                         scales: {
                             x: {
                                 title: {
                                     display: true,
                                     text: 'Minute',
-                                    color: '#333', /* Couleur du texte des axes */
+                                    color: '#333',
                                     font: {
-                                        size: 12
+                                        size: 10
                                     }
                                 }
                             },
@@ -93,9 +99,9 @@
                                 title: {
                                     display: true,
                                     text: 'Nombre de Commits',
-                                    color: '#333', /* Couleur du texte des axes */
+                                    color: '#333',
                                     font: {
-                                        size: 12
+                                        size: 10
                                     }
                                 }
                             }
