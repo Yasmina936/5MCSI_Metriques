@@ -45,7 +45,7 @@ def show_commits():
 
 @app.route("/commits/")
 def moncommits():
-    return render_template("commits.html")   #com2
+    return render_template("commits.html")   
   
 if __name__ == "__main__":
   app.run(debug=True)
